@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{ABSOLUTE} %-5p [%c{1}:%L] %m%n" />
+		</Console>
+
+		<SMTP name="SMTP" subject="USUARIO-UNICO EJB ERROR"
+			to="eduardo.doliveira@sp.senac.br" from="logsenac@sp.senac.br"
+			smtpHost="10.2.0.36" smtpPort="25" bufferSize="1">
+
+			<PatternLayout pattern="%d{ABSOLUTE} %-5p [%c{1}:%L] %m%n" />
+			<Filters>
+				<ThresholdFilter level="error" onMatch="ACCEPT"
+					onMismatch="DENY" />
+				<ThresholdFilter level="fatal" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</SMTP>
+	</Appenders>
+
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="CONSOLE" />
+			<AppenderRef ref="SMTP" />
+		</Root>
+	</Loggers>
+</Configuration>
